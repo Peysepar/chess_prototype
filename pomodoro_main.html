@@ -1,10 +1,129 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <title>My Pomodoro</title>
+    <style>
+        body {
+            margin: 20px;
+            background-color: #ededed;
+        }
+
+        #pageFrame {
+            border: 1px solid #dedede;
+            padding: 50px;
+            background-color: #dedede;
+            text-align: center;
+        }
+
+        #startButton, #cancelButton {
+            font-size: 24px;
+            padding: 20px 30px;
+            border: 2px solid #808080;
+            border-radius: 10px;
+            display: inline-block;
+            margin: 5px;
+            height: 60px;
+        }
+
+        #startButton {
+            background-color: #949191;
+            color: white;
+        }
+
+        #cancelButton {
+            background-color: #a6221e;
+            color: white;
+            display: none;
+        }
+
+        #timerContainer {
+            text-align: center;
+            width: 300px;
+            margin: auto;
+        }
+
+        #timer {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 20px;
+            border: 5px solid #a6221e;
+            padding: 10px;
+            border-radius: 10px;
+            height: 50px;
+        }
+
+        #buttonContainer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: green;
+        }
+    </style>
+    <script>
+        var timerInterval;
+        var timeLeft = 25 * 60; // 25 minutes in seconds
+
+        function startTimer() {
+            document.getElementById('startButton').innerHTML = 'Pomodoro Started!';
+            document.getElementById('startButton').style.backgroundColor = '#949191';
+            document.getElementById('cancelButton').style.display = 'inline-block';
+
+            updateTimerDisplay(); // Update timer display immediately
+
+            timerInterval = setInterval(function() {
+                timeLeft -= 1;
+                updateTimerDisplay();
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    alert('Pomodoro finished!');
+                }
+            }, 1000);
+        }
+
+        function cancelTimer() {
+            clearInterval(timerInterval);
+            timeLeft = 25 * 60;
+            updateTimerDisplay();
+            document.getElementById('startButton').innerHTML = 'Start My Pomodoro!';
+            document.getElementById('startButton').style.backgroundColor = '#949191';
+            document.getElementById('cancelButton').style.display = 'none';
+            document.getElementById('timer').innerHTML = ''; // Reset timer
+        }
+
+        function updateTimerDisplay() {
+            var minutes = Math.floor(timeLeft / 60);
+            var seconds = timeLeft % 60;
+            document.getElementById('timer').innerHTML = pad(minutes) + ":" + pad(seconds);
+        }
+
+        function pad(val) {
+            var valString = val + "";
+            if (valString.length < 2) {
+                return "0" + valString;
+            } else {
+                return valString;
+            }
+        }
+    </script>
 </head>
 <body>
-$END$
+    <div id="pageFrame">
+        <h1>Welcome to your Pomodoro page!</h1>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div id="timerContainer">
+            <div id="timer"></div>
+        </div>
+        <div id="buttonContainer">
+            <button id="startButton" onclick="startTimer()">Start My Pomodoro!</button>
+            <button id="cancelButton" onclick="cancelTimer()">Cancel</button>
+        </div>
+    </div>
 </body>
 </html>
