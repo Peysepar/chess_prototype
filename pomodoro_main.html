@@ -62,7 +62,28 @@
             color: green;
         }
     </style>
+</head>
+<body>
+    <div id="pageFrame">
+        <h1>Welcome to your Pomodoro page!</h1>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div id="timerContainer">
+            <div id="timer"></div>
+        </div>
+        <div id="buttonContainer">
+            <button id="startButton">Start My Pomodoro!</button>
+            <button id="cancelButton" onclick="cancelTimer()">Cancel</button>
+        </div>
+    </div>
+
     <script>
+        // JavaScript event listener to call startTimer() function when startButton is clicked
+        document.getElementById('startButton').addEventListener('click', startTimer);
+
+        // JavaScript functions
         var timerInterval;
         var timeLeft = 25 * 60; // 25 minutes in seconds
 
@@ -109,21 +130,5 @@
             }
         }
     </script>
-</head>
-<body>
-    <div id="pageFrame">
-        <h1>Welcome to your Pomodoro page!</h1>
-        <br>
-        <br>
-        <br>
-        <br>
-        <div id="timerContainer">
-            <div id="timer"></div>
-        </div>
-        <div id="buttonContainer">
-            <button id="startButton" onclick="startTimer()">Start My Pomodoro!</button>
-            <button id="cancelButton" onclick="cancelTimer()">Cancel</button>
-        </div>
-    </div>
 </body>
 </html>
